@@ -1,0 +1,78 @@
+#include <iostream>
+#include "Order.h"
+#include <vector>
+#include <map>
+#include <limits>
+
+int main() {
+    std::vector<Order> orders;
+
+    std::unordered_map<std::string, Order::OrderType> order_type_map;
+    std::unordered_map<std::string, Order::OrderSide> order_side_map;
+
+    order_type_map["l"] = Order::OrderType::LIMIT;
+
+    order_side_map["b"] = Order::OrderSide::BUY;
+    order_side_map["s"] = Order::OrderSide::SELL;
+
+    std::string command;
+    std::string input_type;
+    std::string input_side;
+    double input_price;
+    int input_quantity;
+    while (command != "q") {
+        std::cout << std::endl;
+        std::cout << "(d) to display all orders" << std::endl;
+        std::cout << "(p) to place an order" << std::endl;
+        std::cout << "(q) to quit" << std::endl;
+        std::cout << "Your input: ";
+        std::cin >> command;
+        if (command == "p") {
+            do {
+                std::cout << std::endl;
+                std::cout << "Choose order type" << std::endl << "(l) limit order: ";
+                std::cin >> input_type;
+            } while (input_type != "l");
+
+            do {
+                std::cout << std::endl;
+                std::cout << "Choose order side" << std::endl << "(b) buy, (s) sell: ";
+                std::cin >> input_side;
+            } while (input_side != "b" && input_side != "s");
+
+            do {
+                std::cout << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Enter price: ";
+                std::cin >> input_price;
+            } while (std::cin.fail());
+
+            do {
+                std::cout << std::endl;
+                std::cin.clear();
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cout << "Enter quantity: ";
+                std::cin >> input_quantity;
+            } while (std::cin.fail());
+
+            Order::OrderType type = order_type_map.at(input_type);
+            Order::OrderSide side = order_side_map.at(input_side);
+            
+            orders.push_back(Order(type, side, input_price, input_quantity));
+        } else if (command == "d") {
+            std::cout << std::endl;
+            if (orders.size() == 0) {
+                std::cout << "No Orders to Display" << std::endl;
+            } else {
+                std::cout << "Orders:" << std::endl;
+            }
+            for (Order order : orders) {
+                order.display();
+            }
+            std::cout << std::endl;
+        }
+    }
+
+    return 0;
+}
