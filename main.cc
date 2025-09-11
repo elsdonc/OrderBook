@@ -1,11 +1,12 @@
 #include <iostream>
 #include "Order.h"
+#include "OrderBook.h"
 #include <vector>
 #include <map>
 #include <limits>
 
 int main() {
-    std::vector<Order> orders;
+    OrderBook orderBook;
 
     std::unordered_map<std::string, Order::OrderType> order_type_map;
     std::unordered_map<std::string, Order::OrderSide> order_side_map;
@@ -21,7 +22,6 @@ int main() {
     double input_price;
     int input_quantity;
     while (command != "q") {
-        std::cout << std::endl;
         std::cout << "(d) to display all orders" << std::endl;
         std::cout << "(p) to place an order" << std::endl;
         std::cout << "(q) to quit" << std::endl;
@@ -59,17 +59,10 @@ int main() {
             Order::OrderType type = order_type_map.at(input_type);
             Order::OrderSide side = order_side_map.at(input_side);
             
-            orders.push_back(Order(type, side, input_price, input_quantity));
+            orderBook.placeOrder(Order(type, side, input_price, input_quantity));
         } else if (command == "d") {
             std::cout << std::endl;
-            if (orders.size() == 0) {
-                std::cout << "No Orders to Display" << std::endl;
-            } else {
-                std::cout << "Orders:" << std::endl;
-            }
-            for (Order order : orders) {
-                order.display();
-            }
+            orderBook.displayOrders();
             std::cout << std::endl;
         }
     }
