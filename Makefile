@@ -5,7 +5,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 TARGET   = main
 
 # source and object files
-SRCS     = main.cc Order.cc
+SRCS     = main.cc Order.cc OrderBook.cc
 OBJS     = $(SRCS:.cc=.o)
 
 all: $(TARGET)
