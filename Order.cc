@@ -2,9 +2,7 @@
 
 Order::Order(Order::OrderType type, Order::OrderSide side, double price_in_dollars, int quantity)
     : type_(type), side_(side), price_in_cents_(static_cast<int>(std::ceil(price_in_dollars * 100.0))), 
-    quantity_(quantity), time_(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())) {
-        std::cout << "Order Placed!" << std::endl;
-    }
+    quantity_(quantity), time_(std::chrono::system_clock::to_time_t(std::chrono::system_clock::now())) {}
 
 std::string Order::getOrderType() const {
     switch (type_) {

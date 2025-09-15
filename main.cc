@@ -26,6 +26,7 @@ int main() {
         std::cout << "(p) to place an order" << std::endl;
         std::cout << "(q) to quit" << std::endl;
         std::cout << "Your input: ";
+
         std::cin >> command;
         if (command == "p") {
             do {
@@ -50,11 +51,14 @@ int main() {
 
             do {
                 std::cout << std::endl;
+                std::cout << "Enter quantity (positive integer only): ";
+                if (std::cin >> input_quantity && std::cin.peek() == '\n' && input_quantity > 0) {
+                    break;
+                }
+                std::cout << "Invalid input. Try again." << std::endl;
                 std::cin.clear();
                 std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-                std::cout << "Enter quantity: ";
-                std::cin >> input_quantity;
-            } while (std::cin.fail());
+            } while (true);
 
             Order::OrderType type = order_type_map.at(input_type);
             Order::OrderSide side = order_side_map.at(input_side);
