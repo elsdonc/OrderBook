@@ -2,16 +2,18 @@
 #define Order_Book_H
 
 #include "Order.h"
-#include <vector>
+#include <map>
+#include <deque>
+#include <sstream>
 
 class OrderBook {
 public:
     OrderBook();
-    std::vector<Order> getOrders() const;
     void displayOrders() const;
     void placeOrder(Order order);
 private:
-    std::vector<Order> orders_;
+    std::map<int, std::deque<Order>> asks_;
+    std::map<int, std::deque<Order>> bids_;
 };
 
 #endif // Order_Book_H

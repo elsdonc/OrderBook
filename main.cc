@@ -65,9 +65,7 @@ int main() {
             
             orderBook.placeOrder(Order(type, side, input_price, input_quantity));
         } else if (command == "d") {
-            std::cout << std::endl;
             orderBook.displayOrders();
-            std::cout << std::endl;
         }
     }
 

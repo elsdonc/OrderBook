@@ -22,13 +22,11 @@ public:
     Order(OrderType type, OrderSide side, double price, int quantity);
 
     std::string getOrderType() const;
-    std::string getOrderSide() const;
-    double getOrderPriceDollars() const;
+    OrderSide getOrderSide() const;
     int getOrderPriceCents() const;
     int getOrderQuantity() const;
     std::time_t getOrderTime() const;
     std::string getFormattedTime() const;
-    void display() const;
 private:
     const OrderType type_;
     const OrderSide side_;

@@ -11,20 +11,12 @@ std::string Order::getOrderType() const {
     }
 }
 
-std::string Order::getOrderSide() const {
-    switch (side_) {
-        case OrderSide::BUY: return "BUY";
-        case OrderSide::SELL: return "SELL";
-        default: return "Unknown Order Side";
-    }
+Order::OrderSide Order::getOrderSide() const {
+    return side_;
 }
 
 int Order::getOrderQuantity() const {
     return quantity_;
-}
-
-double Order::getOrderPriceDollars() const {
-    return static_cast<double>(price_in_cents_) / (100.0);
 }
 
 int Order::getOrderPriceCents() const {
@@ -38,8 +30,4 @@ std::time_t Order::getOrderTime() const {
 std::string Order::getFormattedTime() const {
     std::tm* datetime = gmtime(&time_);
     return std::to_string(datetime->tm_hour) + ":" + std::to_string(datetime->tm_min) + ":" + std::to_string(datetime->tm_sec);
-}
-
-void Order::display() const {
-    std::cout << getOrderSide() << " " << getOrderType() << " " << "$" << std::fixed << std::setprecision(2) << getOrderPriceDollars() << " " << std::to_string(quantity_) << " " << getFormattedTime() << std::endl;
 }
