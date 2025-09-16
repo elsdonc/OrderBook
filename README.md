@@ -1,4 +1,4 @@
-# order-book
+# OrderBook
 
 c++ implementation of an order book
 
